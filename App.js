@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 import React, { useState, useEffect }
     from "react";
 import * as Location from 'expo-location';
+import Header from "./Components/Header";
 
 const API_KEY = "89188fd5cadee3143713df91f6b88aad"
 
@@ -50,8 +51,7 @@ export default function App() {
                 const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}`);
                 const data = await response.json();
                 console.log(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}`)
-                data &&
-                await setCurrentWeather(data);
+                data && await setCurrentWeather(data);
             }
 
             getCity()
@@ -67,10 +67,8 @@ export default function App() {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-
-            <View style={styles.header}>
-                <Text style={styles.headerText}>MétéoAppMobile</Text>
-            </View>
+            <Header>
+            </Header>
 
             <View style={styles.currentWeatherContainer}>
                 <View style={styles.textIntro}>
@@ -94,20 +92,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         height: '100%'
-    },
-    header: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        padding: 10,
-    },
-    headerText: {
-        fontFamily: 'Helvetica',
-        fontSize: 20,
-        fontStyle: 'italic',
-        fontWeight: 'bold',
-        color: 'blue',
-        textTransform: 'uppercase'
     },
     currentWeatherContainer:{
         flexDirection:'column',
