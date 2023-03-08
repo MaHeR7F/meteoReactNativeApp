@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, View} from "react-native";
+import {Image, Text, View} from "react-native";
 
 export default function CurrentWeather({icon, currentWeather, styles}) {
 

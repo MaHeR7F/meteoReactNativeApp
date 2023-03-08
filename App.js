@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import {StyleSheet, View} from 'react-native';
+import { StyleSheet, View} from 'react-native';
 import React, { useState, useEffect }
     from "react";
 import * as Location from 'expo-location';
@@ -12,7 +12,7 @@ const API_KEY = "89188fd5cadee3143713df91f6b88aad"
 export default function App() {
 
     // State : stock localisation
-    const [location, setLocation] = useState({latitude:0, longitude:0});
+    const [location, setLocation] = useState({latitude: 0, longitude: 0});
 
     //const [icon, setIcon] = useState('');
 
@@ -25,7 +25,7 @@ export default function App() {
     useEffect(() => {
         // Get permissions
         const getPermissions = async () => {
-            let { status } = await Location.requestForegroundPermissionsAsync();
+            let {status} = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 console.log('Permission denied');
                 return;
@@ -40,27 +40,27 @@ export default function App() {
         // Call Permissions
         getPermissions()
             .then(() => console.log("permission granted"))
-            .then(()=> console.log(location))
+            .then(() => console.log(location))
             .catch(error => console.log(error));
     }, [])
 
-    useEffect( ()=>{
+    useEffect(() => {
         if (location) {
 
             // Get City
             //const getCity = async () => {
-                //const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${location.latitude}&lon=${location.longitude}&limit=5&&appid=${API_KEY}`);
-                //const data = await response.json();
-                //data && data[0] && await setCity(data[0].name);
-            }
-            // Get current weather
-            const getCurrentWeather = async () => {
-                const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`);
-                const data = await response.json();
-                //setIcon(data.weather[0].icon);
-                console.log(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`)
-                data && await setCurrentWeather(data);
-            }
+            //const response = await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${location.latitude}&lon=${location.longitude}&limit=5&&appid=${API_KEY}`);
+            //const data = await response.json();
+            //data && data[0] && await setCity(data[0].name);
+        }
+        // Get current weather
+        const getCurrentWeather = async () => {
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`);
+            const data = await response.json();
+            //setIcon(data.weather[0].icon);
+            console.log(`https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`)
+            data && await setCurrentWeather(data);
+        }
         getCurrentWeather()
             .then(() => console.log(({currentWeather})))
         //.catch(error => console.log(error));
@@ -70,9 +70,9 @@ export default function App() {
             setForecast(data.list); // On récupère une prévision toutes les 8 heures, pour les 3 prochains jours
             console.log(forecast);
         }
-            //getCity()
-                //.then(() => console.log(city))
-                //.catch(error => console.log(error));
+        //getCity()
+        //.then(() => console.log(city))
+        //.catch(error => console.log(error));
         getForecast()
             .then(() => {
                 console.log('Forecast retrieved successfully.');
@@ -85,21 +85,24 @@ export default function App() {
 
 
     return (
-        //<ImageBackground source={require("./assets/lumiere.jpeg")} resizeMode="cover" style={styles.image} alt="background image here">
+        //<ImageBackground source={require("./assets/eau.jpeg")} resizeMode="cover" style={styles.image} alt="background image here">
         <View style={styles.container}>
-            <StatusBar style="auto" />
+            <StatusBar style="auto"/>
 
             <Header/>
             <View>
-            <CurrentWeather styles={styles} icon={{uri :`https://openweathermap.org/img/wn/${currentWeather.weather && currentWeather.weather[0].icon}@4x.png`}} currentWeather={currentWeather}/>
-                </View>
-                <View>
-            <Forecast styles={styles} icon={{uri :`https://openweathermap.org/img/wn/${currentWeather.weather && currentWeather.weather[0].icon}@4x.png`}} forecast={forecast}/>
-                </View>
+                <CurrentWeather styles={styles}
+                                icon={{uri: `https://openweathermap.org/img/wn/${currentWeather.weather && currentWeather.weather[0].icon}@4x.png`}}
+                                currentWeather={currentWeather}/>
+            </View>
+            <View>
+                <Forecast styles={styles}
+                          icon={{uri: `https://openweathermap.org/img/wn/${currentWeather.weather && currentWeather.weather[0].icon}@4x.png`}}
+                          forecast={forecast}/>
+            </View>
         </View>
         //</ImageBackground>
     );
-
 }
 
 const styles = StyleSheet.create({
@@ -109,47 +112,56 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     currentWeatherContainer:{
-        //flexDirection:'column',
+        flexDirection:'column',
+        marginTop: '20%',
         paddingTop:'20%',
-        marginTop: '10%',
         width: '95%',
         backgroundColor: '#FEFEE2',
         borderWidth: 1,
-        padding: 10
+        padding: 10,
     },
     textIntro:{
         padding: 20,
+        textAlign: "center"
     },
     text: {
-        fontSize:20
+        fontSize:20,
+        textAlign: "center"
     },
     icon:{
         height:100,
         width:100,
         borderWidth: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#FFFFFF'
     },
     textContainer: {
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 10
+        alignItems: 'center'
     },
     cityText:{
-        fontSize:24
+        fontSize:24,
+        textAlign: "center"
     },
     tempText:{
-        fontSize:20
+        fontSize:20,
+        paddingTop: 10,
+        textAlign: "center"
     },
     iconContainer: {
         alignItems: 'center'
     },
-    nextContainer: {
+    forecastContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 20,
+        marginBottom: 20,
+        borderWidth: 1,
+        paddingTop: 10,
+        paddingBottom: 10
     },
     item: {
         alignItems: 'center',
+        paddingHorizontal: 10
     },
     time: {
         fontSize: 18,
@@ -157,6 +169,9 @@ const styles = StyleSheet.create({
     },
     temp: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
+    scrollview: {
+        flex: 1
+    }
 });
