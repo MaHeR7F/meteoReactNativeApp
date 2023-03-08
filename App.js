@@ -125,7 +125,6 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     text: {
-        fontSize:20,
         textAlign: "center"
     },
     icon:{
@@ -153,8 +152,7 @@ const styles = StyleSheet.create({
     forecastContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 20,
-        marginBottom: 20,
+        margin: 20,
         borderWidth: 1,
         paddingTop: 10,
         paddingBottom: 10
@@ -173,5 +171,17 @@ const styles = StyleSheet.create({
     },
     scrollview: {
         flex: 1
+    },
+    flatList: {
+        flex: 1,
+        width: '100%'
+    },
+    nextContainer: {
+        alignItems: 'center',
+        marginTop: 30
+    },
+    titreNextContainer: {
+        padding: 10,
+        textAlign: "center"
     }
 });
