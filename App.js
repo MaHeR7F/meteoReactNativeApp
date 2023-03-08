@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 30
     },
-    titreNextContainer: {
+    titleNextContainer: {
         padding: 10,
         textAlign: "center"
     }
