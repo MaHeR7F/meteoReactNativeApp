@@ -25,7 +25,7 @@ export default function Forecast({icon, forecast,styles}) {
     return (
         <View style={styles.forecastContainer}>
             <FlatList
-                style={styles.scrollView}
+                style={styles.scrollview}
                 data={forecast}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.dt.toString()}
