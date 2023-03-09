@@ -72,8 +72,10 @@ export default function App() {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`);
             console.log(`https://api.openweathermap.org/data/2.5/forecast?lat=${location.latitude}&lon=${location.longitude}&appid=${API_KEY}&units=metric`)
             const data = await response.json();
-            setForecast(data.list); // On récupère une prévision toutes les 8 heures, pour les 3 prochains jours
+            console.log(data)
+            setForecast(data.list); // On  récupère une prévision toutes les 8 heures, pour les 3 prochains jours
         }
+
         //getCity()
         //.then(() => console.log(city))
         //.catch(error => console.log(error));
@@ -99,7 +101,7 @@ export default function App() {
                                 icon={{uri: `https://openweathermap.org/img/wn/${currentWeather.weather && currentWeather.weather[0].icon}@4x.png`}}
                                 currentWeather={currentWeather}/>
             </View>
-            {forecast && (               <View>
+           {forecast && (               <View>
             <Forecast
                 forecast={forecast}/>
         </View>)}
@@ -116,8 +118,8 @@ const styles = StyleSheet.create({
     },
     currentWeatherContainer:{
         flexDirection:'column',
-        marginTop: '20%',
-        paddingTop:'20%',
+        marginTop: '10%',
+        paddingTop:'10%',
         width: '95%',
         backgroundColor: '#FEFEE2',
         borderWidth: 1,

@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     header: {
         top: 0,
         left: 0,
-        padding: 10,
+        padding: 50,
     },
     headerText: {
         fontFamily: 'Helvetica',

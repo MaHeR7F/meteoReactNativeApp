@@ -15,9 +15,9 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
         />
     );
 };*/
-const renderItem = (item) => {
+/*const renderItem = (item) => {
 
-    const date = new Date(item.item.dt * 1000);
+    const date = new Date(item.dt * 1000);
     const dayOfWeek = date.toLocaleDateString('fr-FR', {weekday: 'short'});
     const time = date.toLocaleTimeString('en-US', {
         hour: 'numeric',
@@ -30,13 +30,14 @@ console.log(item)
             <View style={styles.item}>
                 <Text style={styles.time}>{`${dayOfWeek} ${time}`}</Text>
               <View style={styles.iconContainer}>
-                    <Image style={styles.icon} source={{uri :`http://openweathermap.org/img/wn/${item.item.weather && item.item.weather[0].icon}@4x.png`}}/>
+                    <Image style={styles.icon} source={{uri :`https://openweathermap.org/img/wn/${item.item.weather && item.item.weather[0].icon}@4x.png`}}/>
                 </View>
                 <Text>{item.item.weather[0].description}</Text>
                <Text style={styles.temp}>{Math.round(item.item.main.temp)}°C</Text>
             </View>
+
     )
-}
+}*/
 export default function Forecast({forecast}) {
 
 
@@ -47,12 +48,18 @@ export default function Forecast({forecast}) {
             </View>
             <View>
                 <FlatList
-                    data={forecast}
-                    keyExtractor={(item) => item.toString()}
                     horizontal={true}
-
-                    renderItem={renderItem}
-                />
+                    data={forecast}
+                    keyExtractor={(item) => item.dt.toString()}
+                    renderItem={({item}) => (
+                        <View style={styles.forecastItem}>
+                            <Text>{new Date(item.dt_txt).toLocaleDateString('en-US', { weekday: 'short', day:'2-digit' })}</Text>
+                            <Text>{new Date(item.dt_txt).getHours()}:00</Text>
+                            <Image style={styles.icon} source={{uri :`http://openweathermap.org/img/wn/${item.weather && item.weather[0].icon}@4x.png`}}/>
+                                <Text>{(item.main.temp ).toFixed(1)}&deg;C</Text>
+                                </View>
+                                )}
+                                />
             </View>
         </View>
     )
